@@ -1,14 +1,14 @@
 **This is my first bash script**
 
-It is used to either add or remove a user:
-1. Use add or remove as your first command line argument
-2. enter a username as second command line argument
-3. enter a password as third command line argument
-	- if left blank, a random password will be generated
+Creates or removes users:
+1. Command line argument 1 - Add or Remove
+2. Command line argument 2 - "username"
+3. Command line argument 3 - "password"
+	-if left blank, script will create a random password
 
-After creation of an account:
-1. email is send to username@companyname.com with a text file provide username and password
-2. For safety, the above mentioned text file is deleted from the system
-3. a text file with company rules is placed in the user's home directory
+Upon user creation:
+1. Email is send to "username"@companyname.com with a copy of login information
+2. Login information deleted from system for safety
+3. A text file of company rules is copied to user's home directory
 
-** made following Mastermnd's DevOps Bootcamp 
+** Created using Mastermnd's DevOps Bootcamp Ep. 7
