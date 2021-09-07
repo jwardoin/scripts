@@ -3,10 +3,11 @@
 
 addUser()
 {
+
 # Check if the command line argument for password is empty and create a random password if so
-if [ -z "$3" ]
+if [ -z "$PASSWORD" ]
 then
-	PASSWORD=$( date +%s | sha256sum | base64 | head -c 32  )i
+	PASSWORD=$( date +%s | sha256sum | base64 | head -c 32  )
 fi
 
 # Create a file to store username and password
@@ -43,12 +44,30 @@ deleteUser()
 USERNAME=$2
 PASSWORD=$3
 
+# Takes a list of usernames and runs each through the addUser function
+if [ "$1" == "addlist" ]
+then
+	
+	while read line; do
+	USERNAME=$line
+	addUser
+	done < newusers.txt
+	exit 0
+
+# Takes a list of usernames and runs each through the deleteUser function
+elif [ "$1" == "removelist" ]
+then
+	while read line; do
+	USERNAME=$line
+	deleteUser
+	done < removeusers.txt
+	exit 0
 
 # Add or Remove user based on command line argument 1
-if [ "$1" == "add" ]
+elif [ "$1" == "add" ]
 then
 	addUser
-	
+
 elif [ "$1" == "remove" ]
 then
 	deleteUser
@@ -58,8 +77,10 @@ else
 fi
 
 # Prompt user to enter a string for command line argument 2
-if [ -z "$2" ]
+if [ -z "$USERNAME" ]
 then
 	echo "Please enter a valid username"
 	exit 1
 fi
+
+exit 0
